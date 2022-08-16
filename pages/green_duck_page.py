@@ -4,10 +4,10 @@ from locators.green_duck_page_loc import GreenDuckPageLoc
 
 
 class GreenDuckPage(BasePage):
-    def change_quantity_for_add_to_basket(self):
+    def change_quantity_for_add_to_basket(self, quantity: str):
         change_quantity = (self.chrome.find_element(*GreenDuckPageLoc.field_quantity_loc))
         change_quantity.clear()
-        change_quantity.send_keys('3')
+        change_quantity.send_keys(f'{quantity}')
 
     def add_to_cart(self):
         button_add_to_cart = (self.chrome.find_element(*GreenDuckPageLoc.button_add_to_cart_loc))

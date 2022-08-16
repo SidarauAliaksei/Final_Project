@@ -4,13 +4,13 @@ from selenium.webdriver.support.select import Select
 
 
 class RegionalSettingsPage(BasePage):
-    def change_currency_value(self):
+    def change_currency_value(self, currency):
         select_currency_euro = Select(self.chrome.find_element(*RegionalSettingsPageLoc.field_select_currency_loc))
-        select_currency_euro.select_by_visible_text('Euros')
+        select_currency_euro.select_by_visible_text(f'{currency.title()}')
 
-    def change_country_value(self):
+    def change_country_value(self, country):
         select_country_belarus = Select(self.chrome.find_element(*RegionalSettingsPageLoc.field_select_country_loc))
-        select_country_belarus.select_by_visible_text('Belarus')
+        select_country_belarus.select_by_visible_text(f'{country.title()}')
 
     def click_button_save(self):
         click_button_save = (self.chrome.find_element(*RegionalSettingsPageLoc.click_save_loc))

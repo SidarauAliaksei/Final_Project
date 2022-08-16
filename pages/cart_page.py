@@ -3,13 +3,13 @@ from locators.cart_page_loc import CartPageLoc
 
 
 class CartPage(BasePage):
-    def check_quantity(self):
+    def check_quantity(self, quantity: str):
         quantity_text = (self.chrome.find_element(*CartPageLoc.order_quantity_info_loc)).text
-        assert quantity_text == '3', 'Error: Incorrect Quantity!'
+        assert quantity_text == f'{quantity}', 'Error: Incorrect Quantity!'
 
-    def check_product(self):
+    def check_product(self, color_duck: str):
         product_text = (self.chrome.find_element(*CartPageLoc.product_text_loc)).text
-        assert product_text == 'Green Duck', 'Error: Wrong Product!'
+        assert product_text == f'{color_duck.title()}', 'Error: Wrong Product!'
 
     def click_confirm_order(self):
         confirm_order = (self.chrome.find_element(*CartPageLoc.button_confirm_order_loc))
@@ -26,10 +26,10 @@ class CartPage(BasePage):
         total = float(''.join(ele for ele in total_text if ele.isdigit() or ele == '.'))
         assert (quantity * price) == total, 'Error: Total price incorrect!'
 
-    def change_quantity_ducks(self):
+    def change_quantity_ducks(self, quantity_ducks: str):
         quantity = (self.chrome.find_element(*CartPageLoc.quantity_duck_loc))
         quantity.clear()
-        quantity.send_keys('3')
+        quantity.send_keys(f'{quantity_ducks}')
 
     def click_button_update_quantity_ducks(self):
         button_update = (self.chrome.find_element(*CartPageLoc.button_update_loc))

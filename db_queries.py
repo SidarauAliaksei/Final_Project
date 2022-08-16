@@ -19,7 +19,7 @@ def check_order_in_db():
         return False
 
 
-def check_changed_first_name():
+def check_changed_first_name(firstname:str):
     db_orders = mysql.connect(
         host="localhost",
         user="root",
@@ -34,7 +34,7 @@ def check_changed_first_name():
     db_orders.close()
     for item in list_first_name:
         first_name = item[0]
-        if first_name == 'Gomer':
+        if first_name == firstname:
             return True
         else:
             return False

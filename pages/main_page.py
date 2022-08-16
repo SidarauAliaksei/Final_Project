@@ -7,25 +7,20 @@ class MainPage(BasePage):
         regional_settings_page = self.chrome.find_element(*MainPageLoc.button_regional_settings_loc)
         regional_settings_page.click()
 
-    def check_currency_and_country(self):
+    def check_currency(self, currency):
         currency_text = self.chrome.find_element(*MainPageLoc.currency_loc).text
+        assert currency_text == f'{currency.upper()}', 'Error: Incorrect currency value!'
+
+    def check_country(self, country:str):
         country_text = self.chrome.find_element(*MainPageLoc.country_loc).text
-        assert currency_text == 'EUR', 'Error: Incorrect currency value!'
-        assert country_text == 'Belarus', 'Error: Incorrect country value'
+        assert country_text == f'{country.title()}', 'Error: Incorrect country value'
 
-    def login_with_alex_user(self):
+    def login_with_email_and_password(self, email:str, password:str):
         email_field = self.chrome.find_element(*MainPageLoc.login_email_field_loc)
-        email_field.send_keys('alex@gmail.com')
+        email_field.send_keys(f'{email}')
 
         password_field = self.chrome.find_element(*MainPageLoc.login_password_field_loc)
-        password_field.send_keys('1111')
-
-    def login_with_bart_user(self):
-        email_field = self.chrome.find_element(*MainPageLoc.login_email_field_loc)
-        email_field.send_keys('bart@gmail.com')
-
-        password_field = self.chrome.find_element(*MainPageLoc.login_password_field_loc)
-        password_field.send_keys('1111')
+        password_field.send_keys(f'{password}')
 
     def check_login_verification(self):
         assert self.is_element_present(MainPageLoc.account_text_loc), 'Error: Element is absent!'
